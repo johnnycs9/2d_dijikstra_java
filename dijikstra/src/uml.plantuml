@@ -1,0 +1,31 @@
+class GamePanel extends JPanel implements Runnable {
+	//GameWindow Size
+		-int originalTileSize
+		-int scale
+		-int tileSize = originalTileSize*scale;
+
+		-int maxScreenCol
+		-int maxScreenRow
+		
+		-int screenWidth = maxScreenCol * tileSize;
+		-int screenHeight = maxScreenRow * tileSize;
+
+	-Thread gameThread;
+	
+	+ GamePanel() 
+
+	+ void startGameThread() 
+	+ void run() 
+	+ void update()
+	+ void paintComponent(Graphics g)
+}
+
+class Viewer {
+	+ static main()
+}
+
+Viewer <|- GamePanel
+
+class Entity{
+	GamePanel Dp 
+}

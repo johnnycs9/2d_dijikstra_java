@@ -5,7 +5,6 @@ import java.awt.Graphics2D;
 import java.awt.Point;
 import java.util.ArrayList;
 
-
 public class Grid extends Cell {
 
   static int totalrows;
@@ -24,7 +23,6 @@ public class Grid extends Cell {
   static ArrayList<Cell> Grid = new ArrayList<Cell>();
   ArrayList<Cell> Unvisited = new ArrayList<Cell>();
   static ArrayList<Cell> Queue = new ArrayList<Cell>();
-
 
   public Grid(
     int totalrows,
@@ -84,7 +82,6 @@ public class Grid extends Cell {
 
     //draw squares
     for (int i = 0; i < Grid.size(); i++) {
-
       g2.draw(Grid.get(i));
 
       if (Grid.get(i).NodeType.equals("")) {
@@ -159,7 +156,7 @@ public class Grid extends Cell {
           Grid.get(i).NodeType = "ObstacleNode";
         }
       }
-			found=false;
+      found = false;
     } else if (
       setObstacleBoolean == false && setObstacleButtonBoolean == true
     ) {
@@ -168,26 +165,35 @@ public class Grid extends Cell {
           Grid.get(i).NodeType = "";
         }
       }
-			found=false;
+      found = false;
     } else if (setEndingBoolean) {
       for (int i = 0; i < Grid.size(); i++) {
-        if (!(Grid.get(i).NodeType.equals("StartNode") || Grid.get(i).NodeType.equals("ObstacleNode"))) {
+        if (
+          !(
+            Grid.get(i).NodeType.equals("StartNode") ||
+            Grid.get(i).NodeType.equals("ObstacleNode")
+          )
+        ) {
           Grid.get(i).NodeType = "";
         }
-				Grid.get(i).visitedCell = false;
+        Grid.get(i).visitedCell = false;
         Grid.get(i).cost = 1000000;
         Grid.get(i).Parent = null;
 
         if (Grid.get(i).contains(point)) {
           Grid.get(i).NodeType = "EndNode";
-					endSet=true;
+          endSet = true;
         }
-				
       }
-			found=false;
+      found = false;
     } else if (setStarterBoolean) {
       for (int i = 0; i < Grid.size(); i++) {
-        if (!(Grid.get(i).NodeType.equals("EndNode") || Grid.get(i).NodeType.equals("ObstacleNode")) ) {
+        if (
+          !(
+            Grid.get(i).NodeType.equals("EndNode") ||
+            Grid.get(i).NodeType.equals("ObstacleNode")
+          )
+        ) {
           Grid.get(i).NodeType = "";
         }
 
@@ -197,38 +203,37 @@ public class Grid extends Cell {
 
         if (Grid.get(i).contains(point)) {
           Grid.get(i).NodeType = "StartNode";
-					startSet=true;
+          startSet = true;
         }
       }
-      found=false;
+      found = false;
     }
   }
 
   public void toggleFiller(Point point) {
     for (int i = 0; i < Grid.size(); i++) {
-        if (
-          Grid.get(i).contains(point) &&
-          !(Grid.get(i).NodeType.equals("ObstacleNode"))
-        ) {
-          setObstacleBoolean = true;
-        } else if (
-          Grid.get(i).contains(point) &&
-          Grid.get(i).NodeType.equals("ObstacleNode")
-        ) {
-          setObstacleBoolean = false;
-        }
+      if (
+        Grid.get(i).contains(point) &&
+        !(Grid.get(i).NodeType.equals("ObstacleNode"))
+      ) {
+        setObstacleBoolean = true;
+      } else if (
+        Grid.get(i).contains(point) &&
+        Grid.get(i).NodeType.equals("ObstacleNode")
+      ) {
+        setObstacleBoolean = false;
       }
-
-      fillCell(point);
     }
-  
+
+    fillCell(point);
+  }
 
   public static void PathFinderStart(Graphics2D g2) {
     if (togPathFinder && found == false && endSet == true && startSet == true) {
       int startRow = -1;
       int startCol = -1;
       Queue.clear();
-System.out.println("in pathfinder start");
+      System.out.println("in pathfinder start");
       //Get Starting Rows/cols
       for (int i = 0; i < Grid.size(); i++) {
         if (Grid.get(i).NodeType.equals("StartNode")) {
@@ -301,7 +306,7 @@ System.out.println("in pathfinder start");
         continue;
       }
 
-			if (Grid.get(getIndex(rr,cc)).NodeType.equals("ObstacleNode")) {
+      if (Grid.get(getIndex(rr, cc)).NodeType.equals("ObstacleNode")) {
         continue;
       }
 
